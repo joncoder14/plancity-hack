@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ./plancity-api
+    container_name: plancity-api
+    env_file:
+      - ./plancity-api/.env
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./plancity
+    container_name: plancity-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
